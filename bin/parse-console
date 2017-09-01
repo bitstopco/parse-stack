@@ -9,7 +9,7 @@ require 'active_support/core_ext'
 DEFAULT_CONFIG_FILE = 'config.json'
 DEFAULT_CONFIG_CONTENTS = {
   "apps": [{
-    "serverURL": "http://localhost:1337/parse",
+    "serverURL": ENV['PARSE_SERVER_URL'],
     "appId": "myAppId",
     "masterKey": "myMasterKey",
     "restAPIKey": "myRestAPIKey",
@@ -90,7 +90,7 @@ opt_parser = OptionParser.new do |o|
 end
 opt_parser.parse!
 
-opts[:server_url] ||= ARGV.shift || 'http://localhost:1337/parse'
+opts[:server_url] ||= ARGV.shift || ENV['PARSE_SERVER_URL']
 
 if opts[:app_id].nil?
   $stderr.puts "Error: Option --app_id missing\n"
